@@ -1,0 +1,140 @@
+
+<title>All questions in the library</title>
+
+<!doctype html>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/test_create.css"/>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
+    <script src="../assets/js/modernizr.js"></script>
+  </head>
+
+<body>
+<!--   <div class="row">
+    <div class="large-12 columns">
+      <div class="top_panel">
+        <h1 id="greeting"><span class="hi">Hi,</span><span><%= current_user.name %></span></h1>
+        <div id="toggleLog">Log Out</div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+
+    <div id="side_bar" class="large-2 columns ">
+      <div class="panel">
+        <h1 id="greeting"><span class="hi">Hi,</span><span><%= current_user.name %></span></h1>
+        <img src="<%= current_user.avatar %>" style="border: 0px; margin-top: 5px">
+
+        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+          <section class="section">
+            <h4>Tests</h4>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/tests/new"><span>Create new test</span></a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="tests"><span>View saved tests</span></a></h5>
+          </section>
+
+          <section class="section">
+            <h4>Questions</h4>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/questions"><span>View all questions</span></a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/questions/new"><span>Submit new question</span></a></h5>
+          </section>
+        </div><!--END OF div class section-container vertical-nav -->
+      </div><!-- END OF DIV class panel -->
+    </div><!-- END OF DIV id="side_bar"  -->
+
+    <div class="container-right">
+
+<div class="container">
+<!--   <a href="/questions?sort_by=rating"><u>Best rated first</u></a>
+  <br>
+  <a href="/questions"><u>Most recent first</u></a>
+  <br> -->
+  <div id="toggleLog"><a href="/questions?sort_by=rating">Best rated</a></div>
+  <div id="toggleLog"><a href="/questions">Most recent</a></div>
+  <h1 class="title">See all <%= Question.count %> Questions posted so far:</h1>
+
+  <form method = "post" action = "/question-selections">
+    <% if current_user.tests.empty? == false %>
+      <h3> Add questions to: </h3><br>
+        <select id="user_tests" name="test_id">
+         <% current_user.tests.each do |test| %>
+            <option value="<%= test.id %>"><%= test.name %></option>
+          <% end %>
+        </select>
+    <% end %>
+<% @all_questions.each_with_index do |question, qidx| %>
+  <div class="question">
+    <div class="questions">
+    <h4><a href="/questions/<%= question.id %>"><%= question.content %></a>
+      <% unless question.image == "" %>
+        <em>(attachment included)</em>
+      <% end %>
+    </h4>
+    <p>
+      <% unless question.average_rating == 0 %>
+        <em>rating: <%= question.average_rating %></em>
+
+        <% if question.average_rating %>
+            <% question.average_rating.to_i.times do %>
+              <i class="fa fa-star" style="color: #FFDF88"></i>
+            <% end %>
+            <% (5 - question.average_rating.to_i).times do %>
+              <i class="fa fa-star-o" style="color: #D2D2D2"></i>
+            <% end %>
+        <% end %>
+
+      <% end %>
+    </p>
+
+    <p class="poster"><em>posted by <%= question.user.name %>
+      <% if current_user && question.user_id == current_user.id %>
+        <a href="/questions/<%= question.id %>/delete">(delete question)</a>
+      <% end %>
+      </em>
+    </p>
+      <ul>
+        <% question.answers.each do |answer| %>
+          <li><%= answer.content %> (<%= answer.correct %>)</li>
+        <% end %>
+      </ul>
+
+    <p class="tag">Tags: </p>
+      <p>
+        <% question.question_tags.each do |qt_combination| %>
+          <a href="../tags/<%= qt_combination.tag_id.to_i %>"><%= Tag.find(qt_combination.tag_id.to_i).name %></a>
+        <% end %>
+      </p>
+      <div>
+          <input class="add_q_to_test" type="checkbox" name="questions[<%= qidx %>]" value="<%=question.id%>"><strong>Add to test?</strong><br>
+      </div>
+  </div>
+  </div>
+
+<% end %>
+
+<input class="button" type="submit" value="Submit">
+</form>
+
+<% if params[:offset].to_i != 0 %>
+  <a href="questions?limit=<%= params[:limit] || 5 %>&offset=<%= ((params[:offset] || 0).to_i - (params[:limit] || 5).to_i).to_s %>">Prev</a>
+<% end %>
+
+<% if params[:offset].to_i + params[:limit].to_i > Question.count %>
+  <a href="questions">Back to first page</a>
+<% else %>
+  <% unless Question.count <= 5 %>
+    <a href="questions?limit=<%= params[:limit] || 5 %>&offset=<%= ((params[:limit] || 5).to_i + (params[:offset] || 0).to_i).to_s %>">Next</a>
+  <% end %>
+<% end %>
+
+</div>

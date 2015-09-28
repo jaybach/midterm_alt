@@ -1,0 +1,25 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/create_question.css"/>
+
+<div class="container">
+  <h1>Questions under: <%= @tag.name  %></h1>
+  <% @tagged_questions.each do |question| %>
+  <div class="question">
+    <h4><a href="/questions/<%= question.id %>"><%= question.content %></a></h4>
+      <ul>
+        <% question.answers.each do |answer| %>
+          <li><%= answer.content %> (<%= answer.correct %>)</li>
+        <% end %>
+      </ul>
+    <p><em>posted by <%= question.user.name %>
+      <% if current_user && question.user_id == current_user.id %>
+        <a href="/questions/<%= question.id %>/delete">(delete question)</a>
+      <% end %>
+      </em>
+    </p>
+    </hr><hr/>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,55 @@
+body {
+  background-color: white;
+}
+
+h3 {
+  margin-top: -15px;
+  padding-bottom: 5px;
+}
+
+.title {
+  color: black;
+}
+
+.poster {
+  margin-top: -20px;
+}
+
+.tag {
+  margin-bottom: -15px;
+}
+
+span.hi {
+  color: black;
+}
+
+.container {
+  display: block;
+  margin-top: 0px;
+}
+
+.container-right {
+  display: inline-block;
+  width: 72%;
+}
+
+.questions {
+  -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+  border-radius: 4px;
+  color: black;
+  display: block;
+/*  float: right;*/
+  margin-top: 20px;
+  margin-right: 40px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-top: 0.25px;
+  width: 100%;
+}
+
+#user_tests {
+  width: 30%;
+}
+

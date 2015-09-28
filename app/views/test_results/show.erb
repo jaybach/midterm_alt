@@ -1,0 +1,53 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/create_question.css"/>
+
+<<<<<<< HEAD
+<body>
+
+<div class="container">
+
+<div> 
+  <h3> <em> Name: <%=@candidate[:candidate_name]%> </em> </h3>
+	 <br>
+   <strong> Email: <%=@candidate[:candidate_email]%> </strong>
+=======
+<title><%= @test.name %>: Results</title>
+<div>
+  <h3> Name: <%=@candidate[:candidate_name]%></h3>
+  <br>
+  <div><strong> Email: <%=@candidate[:candidate_email]%> </strong></div>
+>>>>>>> 2c30929ee5d3121be6eea66a5f4160fe28077ba0
+	 <p> <strong> Score on Test: <%=@candidate[:candidate_score]*100%>% </strong> </p>
+</div>
+
+<div>
+<% if !@candidate.candidate_answers.nil? %>
+  <h2> Test questions: </h2>
+  <% @candidate.test.questions.each_with_index do |question, idx| %>
+    <div>
+    <%="Question #{idx + 1}: #{question[:content]}"%>
+    </div>
+    <% end %>
+  <h2> Candidate answers: </h2>
+  <% @cand = @candidate.candidate_answers.split(",") %>
+  <% @cand.each_with_index do |answer, idx| %>
+    <div>
+    <%="Question #{idx + 1}: #{answer}"%>
+    </div>
+  <% end %>
+<% end %>
+</div>
+<div>
+<<<<<<< HEAD
+  <strong><a class="button" href="/tests/<%=@test.id%>/test_results/>">Back to main index </a></strong>
+</div>
+  <br>
+  <br>
+</body>
+=======
+<br>
+  <strong><a href="/tests/<%=@test.id%>/test_results/>">Back to main index </a></strong>
+
+>>>>>>> 2c30929ee5d3121be6eea66a5f4160fe28077ba0

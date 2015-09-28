@@ -1,0 +1,141 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title><%= @test.name if @test %></title>
+    <meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
+    <meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
+    <meta name="copyright" content="ZURB, inc. Copyright (c) 2015"/>
+    <link rel="stylesheet" href="stylesheets/foundation.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/test_create.css"/>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
+    <script src="../assets/js/modernizr.js"></script>
+  </head>
+
+
+<!-- <body>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="top_panel">
+        <h1 id="greeting"><span class="hi">Hi, </span><span>Client</span></h1>
+        <div id="toggleLog">Log Out</div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+
+    <div id="side_bar" class="large-2 columns ">
+      <div class="panel">
+        <h1 id="greeting"><span class="hi">Hi,</span><span><%= current_user.name %></span></h1>
+        <img src="<%= current_user.avatar %>" style="border: 0px; margin-top: 5px">
+
+        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+          <section class="section">
+            <h4>Tests</h4>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/tests/new"><span>Create new test</span></a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="tests"><span>View saved tests</span></a></h5>
+          </section>
+
+          <section class="section">
+            <h4>Questions</h4>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/questions"><span>View all questions</span></a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="/questions/new"><span>Submit new question</span></a></h5>
+          </section>
+        </div><!--END OF div class section-container vertical-nav -->
+      </div><!-- END OF DIV class panel -->
+    </div><!-- END OF DIV id="side_bar"  -->
+
+
+
+    <div class="container-right" >
+      <div class="container large-10 columns ">
+        <% if @auth_user %>
+          <div><h1 class="test_name"><%= @test.name if @test %></h1></div>
+          <div id="toggleLog"><a target="_blank" href="/tests/<%= @test.id %>/take_test">Get URL</a></div>
+          <div id="toggleLog"><a target="_blank" href="/tests/<%= @test.id %>/test_results/new">See Results</a></div>
+          <br><br>
+          <div>
+            <h3> Current questions on test:</h3>
+              <form method = "post" action = "/question-selections-deletions">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="test_id" value="<%=@test.id%>">
+            <% @test.question_selections.each_with_index do |question_selection, qidx| %>
+              <% question = question_selection.question %>
+            <div class="questions">
+              <h4><a href="/questions/<%= question.id %>">Question #<%="#{qidx + 1}"%>: <%= question.content %></a></h4>
+                <input type="checkbox" name="questions[<%= qidx %>]" value = "<%= question.id %>"> Delete from test?
+            </div><!-- END DIV CLASS QUESTIONS -->
+          <% end %>
+          <% if @test.questions.any? %>
+          <br>
+          <input class="button3" type="submit" value= "delete">
+          <% end %>
+          </form>
+
+        </div>
+
+      </div><!-- END OF DIV CLASS container -->
+
+
+
+
+      <div class="container large-10 columns ">
+        <br>
+        <br>
+        <h3> All questions: </h3>
+        <form method = "post" action = "/question-selections">
+        <% @questions.each_with_index do |question, qidx| %>
+        <div class="questions">
+          <h4 class="black"><a href="/questions/<%= question.id %>"><legend>Question #<%="#{qidx +1}"%>: <%= question.content %></legend></a></h4>
+            <input type="checkbox" name="questions[<%= qidx %>]" value="<%=question.id%>"> Add to test?<br>
+            <input type ="hidden" name = "test_id" value = "<%= @test.id%>">
+            </div>
+             <% end %>
+
+      </div><!-- END OF DIV CLASS container -->
+
+
+      <div class="container large-10 columns ">
+        <br>
+        <br>
+        <h3> Questions I wrote: </h3>
+        <% @questions.each_with_index do |question, qidx| %>
+          <% if question.user_id == session[:user_id] %>
+            <div class="questions">
+              <h4 class="no_creator"><a href="/questions/<%= question.id %>"><legend>Question #<%="#{qidx +1}"%>: <%= question.content %></legend></a></h4>
+                <input type="checkbox" name="questions[<%= qidx %>]" value="<%=question.id%>"> Add to test?<br>
+                <input type ="hidden" name = "test_id" value = "<%= @test.id%>">
+            </div>
+          <% end %>
+        <% end %>
+        <% if !@questions.empty? %>
+        <br>
+        <input class="button3" type ="submit" value="Submit">
+        <% end %>
+        </form>
+      </div><!-- END OF DIV CLASS container -->
+    </div><!-- END OF CONTAINER-RIGHT -->
+  </div>
+  <% else %>
+    <div>
+      <strong>Access restricted. Please login first!</strong>
+    </div>
+  <% end %>
+
+
+</body>

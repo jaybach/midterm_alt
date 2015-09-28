@@ -1,0 +1,118 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/create_question.css"/>
+
+
+
+<!-- <header>
+  <div id="profile-button">Return to profile page</div>
+</header> -->
+
+
+
+<body>
+
+<div class="container">
+
+   <h1>Add a question to the library:</h1>
+   <br>
+
+  <% if current_user %>
+
+  <!-- Form id name needed for Javascript; please advise if you change -->
+  <!-- Class .answers and .answer necesserary; please advise if you change so we update javascript -->
+
+  <form id="question-form" method="post" action="/questions">
+
+      <div>
+        <label class="label" for="content">Question:</label>
+          <input type="text" style="height: 20px; width: 600px" placeholder="e.g. To set up Dynamic Remarketing, you must do which of these things?" name="content" value="<%= @new_question.content if @new_question %>">
+          <div class="space"></div>
+      </div>
+
+      <div>
+        <label class="label" for="content">Add some tags to your question:</label>
+        <div class="corral">
+          <select multiple name="tags[]">
+          <% Tag.all.each do |tag| %>
+              <option value="<%= tag.name %>"><%= tag.name %></option>
+          <% end %>
+          </select>
+          <div class="space"></div>
+        </div>
+      </div>
+
+      <div>
+        <label class="label" for="image">Embed an image in your question:</label>
+        <input type="url" style="height: 20px; width: 600px" placeholder="image url" name="image_url" value="<%= @new_question.image if @new_question %>">
+        <div class="space"></div>
+      </div>
+
+      <div>
+        <label class="label" for="no_of_answers">How many answers do you want to add for this question? (min. 2, max. 5)</label>
+        <button class="add_answer button">+</button> <button class="remove_answer button">-</button>
+        <div class="space"></div>
+      </div>
+
+      <div class="answers">
+
+        <div class="answer">
+          <label class="label" for="answer1_content">Answer 1:</label>
+          <input type="text" name="answer1_content" class="answer_content">
+          <label class="label" for="answer1_correct">Correct?</label>
+            <input type="radio" name="answer1_correct" value="true">Yes
+            <input type="radio" name="answer1_correct" value="false">No
+        </div>
+
+        <div class="answer">
+          <label class="label" for="answer2_content">Answer 2:</label>
+          <input type="text" name="answer2_content" class="answer_content">
+          <label class="label" for="answer2_correct">Correct?</label>
+          <input type="radio" name="answer2_correct" value="true">Yes
+          <input type="radio" name="answer2_correct" value="false">No
+        </div>
+
+        <div class="answer">
+          <label class="label" for="answer3_content">Answer 3:</label>
+          <input type="text" name="answer3_content" class="answer_content">
+          <label class="label" for="answer3_correct">Correct?</label>
+          <input type="radio" name="answer3_correct" value="true">Yes
+          <input type="radio" name="answer3_correct" value="false">No
+        </div>
+
+        <div class="answer">
+          <label class="label" for="answer4_content">Answer 4:</label>
+          <input type="text" name="answer4_content" class="answer_content">
+          <label class="label" for="answer4_correct">Correct?</label>
+          <input type="radio" name="answer4_correct" value="true">Yes
+          <input type="radio" name="answer4_correct" value="false">No
+        </div>
+
+        <div class="answer">
+          <label class="label" for="answer5_content">Answer 5:</label>
+          <input type="text" name="answer5_content" class="answer_content">
+          <label class="label" for="answer5_correct">Correct?</label>
+          <input type="radio" name="answer5_correct" value="true">Yes
+          <input type="radio" name="answer5_correct" value="false">No
+        </div>
+
+      </div>
+
+      <div id="submit_button">
+      <button class="button" type="submit">Submit</button>
+      </div>
+
+  </form>
+
+  <% else %>
+
+  <div>
+      <strong>Access restricted. Please login first!</strong>
+  </div>
+
+  <% end %>
+
+</div>
+
+</body>

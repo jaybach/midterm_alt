@@ -1,0 +1,179 @@
+/*.top_panel {
+  padding-bottom: -100px;
+}*/
+
+logo_top {
+  display: inline-block;
+}
+
+
+body {
+  display: block;
+}
+
+span {
+  /*background: #800000;*/
+  border-radius: 20px;
+ /* background: linear-gradient(0, 0, 0, 0);*/
+ /*color: rgb(50, 200, 200);*/
+ /* color: #800000;*/
+  color: white;
+  text-shadow: 1px 1px #000000;
+  padding: 5px;
+}
+
+span2 {
+  /*background: #800000;*/
+ /* background: linear-gradient(0, 0, 0, 0);*/
+  /*color: #800000;*/
+  color: white;
+  text-shadow: 1px 1px #000000;
+  padding: 5px;
+}
+
+.top {
+/*  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+    ),
+    url(../images/business.jpg);*/
+ /* background-image: url(../images/marketeers.png);*/
+  background-image: url(../images/NYC-Skyline.jpg);
+  /*background-size: cover;*/
+  border-color: 5px solid black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2000px;
+  display: block;
+  height: 75px;
+  margin-left: 0px;
+  margin-right: -50px;
+  padding: 0px;
+  padding-bottom: 500px;
+  /*padding-top: 50px;*/
+  width: 100%;
+}
+
+.top-words {
+  padding-top: 250px;
+}
+
+
+/*.image1 {
+  border: 1px solid;
+  border-color: #800000;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}*/
+
+h1 {
+  /*background: rgba(128, 0, 0, 0.75);*/
+  /*background: rgba(255, 255, 255, 0.0);*/
+  /*background-color: black;*/
+  font-size: 250%;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+/*  width: 500px;*/
+}
+
+h2 {
+  /*background: rgba(255, 255, 255, 0.75);*/
+  position: relative;
+  text-align: center;
+}
+
+h3 {
+  /*color: #800000;*/
+  color: #5280EB;
+  text-align: center;
+}
+
+h4 {
+  /*color: #800000;*/
+  color: #5280EB;
+  text-decoration: none;
+}
+
+#toggleLog1 {
+  /*background-color: #800000;*/
+  /*background-color: #00BFFF;*/
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  font-size: 12px;
+  height: 5px;
+  margin-left: 160px;
+  margin-top: 120px;
+  padding-bottom: 15px;
+  padding-top: 1px;
+  position: absolute;
+  text-align: center;
+  text-transform: translateY(-50%);
+  width: 70px;
+}
+
+#toggleLog2 {
+  background-color: #5280EB;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  float: bottom;
+  font-size: 12px;
+  height: 5px;
+  margin-left: 475px;
+  margin-top: 120px;
+  padding-bottom: 15px;
+  padding-top: 1px;
+  position: absolute;
+  text-align: center;
+  text-transform: translateY(-50%);
+  width: 70px;
+}
+
+.bottom {
+  /*border: 5px solid black;*/
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  height: 500px;
+  margin-top: -50px;
+}
+
+.b1, .b2, .b3 {
+  /*border: 1px solid red;*/
+  /*display: inline-block;*/
+  float: left;
+  margin: 2%;
+  width: 29%;
+}
+
+p {
+  text-align: justify;
+}
+
+.logo {
+  border: none;
+  margin-left: -300px;
+}
+
+.text h4 {
+  float: right;
+  margin-left: 500px;
+  margin-top: -350px;
+  text-decoration: none;
+}
+
+footer {
+  display: block;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-top: 30px;
+}

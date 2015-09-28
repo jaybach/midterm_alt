@@ -1,0 +1,20 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/create_question.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/index.css"/>
+
+<title>Thank you!</title>
+
+<div class="container">
+  <h1>Thank you for taking this test!</h1>
+
+  <h2>If you have any questions, please contact:</h2>
+
+  <% test_owner = User.find(params[:id]) %>
+  <h3><%= test_owner.name %></h3>
+  <br>
+  <div id="toggleLog" style="float: left"><a href="mailto:<%= test_owner.email %>">Send email</a></div>
+</div>
+
+</html>

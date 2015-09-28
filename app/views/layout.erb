@@ -1,0 +1,80 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more."/>
+    <meta name="author" content="ZURB, inc. ZURB network also includes zurb.com"/>
+    <meta name="copyright" content="ZURB, inc. Copyright (c) 2015"/>
+    <link rel="stylesheet" href="/stylesheets/foundation.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/index.css"/>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.js"></script>
+    <!-- <script src="../assets/js/modernizr.js"></script> -->
+
+    <link rel="stylesheet" href="/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <script src="/javascript/application.js"></script>
+
+<!--     <title>Page Title</title> -->
+  <%= @title %></title>
+  </head>
+
+
+<header>
+<div class="row" style="{height=50px}">
+  <div class="large-12 columns">
+    <div class="top_panel">
+
+      <!-- <a href="#"><img id="header-logo" src="/images/marketeers-wide.png" style="height: 98%">
+      <div id="toggleLog"><a href="/logout">Log In</a></div> -->
+
+      <a href="#"><img id="header-logo" src="/images/marketeers-wide.png" style="height: 98%"></a>
+
+      <% if current_user %>
+        <div id="toggleLog"><a href="/logout">Log Out</a></div>
+        <div id="toggleLog"><a href="/tests/new">Create test</a></div>
+        <div id="toggleLog"><a href="/tests">Tests</a></div>
+        <div id="toggleLog"><a href="/questions/new">Add question</a></div>
+        <div id="toggleLog"><a href="/questions">All questions</a></div>
+      <% end %>
+      <% if !current_user %>
+      <div id="toggleLog"><a href="/login">Log In</a></div>
+      <div id="toggleLog"><a href="/users/new">Register</a></div>
+      <% end %>
+      <div id="toggleLog"><a href="/contact">Contact</a></div>
+      <div id="toggleLog"><a href="/about">About</a></div>
+      <div id="toggleLog"<a href="/">Home</a></div>
+
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+<body>
+  <%= yield %>
+</body>
+
+
+
+<!-- jQuery bar rating plugin -->
+<script src="/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+<script type="text/javascript">
+   $(function() {
+      $('#rating').barrating({
+        theme: 'fontawesome-stars',
+        initialRating: 1,
+        showValues: true,
+        showSelectedRating: true
+      });
+   });
+</script>
+
+</html>

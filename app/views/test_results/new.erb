@@ -1,0 +1,44 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/user.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/create_question.css"/>
+
+<title><%= @test.name %></title>
+
+<body>
+
+<div class="container">
+<<<<<<< HEAD
+<h1 class="blue"> Take the following test! </h1>
+<h3> Company: <%= @test.user.company %> </h3>
+=======
+<h1> <%= @test.name %> </h1>
+Company: <%= @test.user.company %> </h1>
+>>>>>>> 2c30929ee5d3121be6eea66a5f4160fe28077ba0
+<br>
+<% if @test.logo %>
+  <div><img class="test_logo" width="100px" src="<%= @test.logo %>" alt="<%= @test.name %> - <%= @test.user.company %>"></div>
+<% end %>
+
+<div class="test_form">
+  <form method="post" action="/tests/<%= @test.id %>/test_results">
+    <div><input type="text" name ="name" placeholder="What is your full name?" style="width: 25%" value="<%=@new_result.candidate_name if @new_result%>"></div><br>
+    <div><input type="text" placeholder="What is your email?" name ="email" style="width: 25%" value="<%= @new_result.candidate_email if @new_result %>"></div>
+    <br>
+    <% @test.questions.each_with_index do |question, qidx| %>
+      <fieldset>
+        <legend>Question <%= "#{qidx + 1}"%>: <%=question.content %></legend>
+        <% question.answers.each_with_index do |answer, idx| %>
+        <p>
+          <input type="radio" name="questions[<%= qidx %>]" value="<%=answer.id%>">
+          Answer <%="#{idx + 1}" %>: <%= answer.content %>
+        </p>
+      <% end %>
+      </fieldset>
+      <br>
+    <% end %>
+    <input class="button3" type="submit" value="Submit">
+  </form>
+</div>
+</div>
+</body>
